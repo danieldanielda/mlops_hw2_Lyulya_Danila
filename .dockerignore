@@ -1,0 +1,6 @@
+pycache/
+*.pyc
+.git/
+.env
+README.md
+mlopshw/
