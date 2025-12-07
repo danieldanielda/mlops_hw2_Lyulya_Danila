@@ -1,8 +1,10 @@
 FROM python:3.11-slim
 
-ENV PORT=50051 \
-    MODEL_PATH=/models/model.pkl \
-    MODEL_VERSION=v1.0.0
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
 
 WORKDIR /app
 

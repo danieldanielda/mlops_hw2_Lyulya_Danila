@@ -1,4 +1,3 @@
-import os
 import grpc
 from protos import model_pb2, model_pb2_grpc
 
@@ -11,9 +10,10 @@ def run():
     print("Health:", health_response)
 
     # Predict
-    predict_request = model_pb2.PredictRequest(features=[5.1, 3.5, 1.4, 0.2])  # Пример для Iris
+    predict_request = model_pb2.PredictRequest(features=[5.1, 3.5, 1.4, 0.2])
     predict_response = stub.Predict(predict_request)
     print("Predict:", predict_response)
 
-if __name__ == "main":
+
+if __name__ == "__main__":
     run()

@@ -1,6 +1,7 @@
 import os
 import pickle
 import logging
+import joblib
 from concurrent import futures
 
 import grpc
@@ -14,12 +15,17 @@ MODEL_VERSION = os.getenv("MODEL_VERSION", "v1.0.0")
 
 # Загрузка модели
 try:
-    with open(MODEL_PATH, "rb") as f:
-        model = pickle.load(f)
-    logger.info(f"Model loaded from {MODEL_PATH}")
+    model = joblib.load(MODEL_PATH)
+    logger.info(f"Model loaded successfully using joblib")
 except Exception as e:
-    logger.error(f"Failed to load model: {e}")
-    model = None
+    logger.error(f"Failed to load with joblib: {e}")
+    # Пробуем pickle как запасной вариант
+    try:
+        with open(MODEL_PATH, "rb") as f:
+            model = pickle.load(f, encoding='latin1')
+    except Exception as e2:
+        logger.error(f"Failed to load with pickle too: {e2}")
+        model = None
 
 
 class PredictionService(model_pb2_grpc.PredictionServiceServicer):
@@ -63,5 +69,5 @@ def serve():
     server.wait_for_termination()
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     serve()
