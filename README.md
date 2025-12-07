@@ -19,15 +19,16 @@ Client (gRPC) → Docker Container → gRPC Server → ML Model → Response <br
 1. Сборка Docker <br>
     
   ``` docker build -t grpc-ml-service .``` 
+
 2. Запуск контейнера <br>
-    
+
   ``` docker run -p 50051:50051 grpc-ml-service```
 
 ## Проверка работы контейнера
    
   ``` docker ps -a```
 
-    ![Step 1](images/1.png)
+![Step 1](images/1.png)
     
 ## Примеры вызовов /health и /predict
 
@@ -37,7 +38,7 @@ Client (gRPC) → Docker Container → gRPC Server → ML Model → Response <br
   ``` grpcurl -plaintext -proto protos/model.proto localhost:50051 mlservice.v1.PredictionService/Health```
     
     Полученный ответ: <br>
-        ![Step 2](images/2.png)
+![Step 2](images/2.png)
 
 ### /predict
     Запустите в терминале: <br>
@@ -45,4 +46,4 @@ Client (gRPC) → Docker Container → gRPC Server → ML Model → Response <br
    ``` python -m client.client```
     
     Полученный ответ: <br>
-    ![Step 3](images/3.png)
+![Step 3](images/3.png)
