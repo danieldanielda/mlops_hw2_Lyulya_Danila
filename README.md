@@ -29,6 +29,16 @@ Client (gRPC) → Docker Container → gRPC Server → ML Model → Response <br
   ``` docker ps -a```
 
 ![Step 1](images/3.png)
+
+## Подготовка
+
+1. Создайте виртуальное окружение и выполните следующую команду:
+    
+```pip install grpcio grpcio-tools protobuf```
+
+2. Установите утилиту grpcurl на Windows по команде в терминале и перезапустите IDE:
+    
+ ```winget install -e --id fullstorydev.grpcurl```
     
 ## Примеры вызовов /health и /predict
 
